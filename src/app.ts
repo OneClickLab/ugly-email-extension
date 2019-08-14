@@ -6,8 +6,6 @@ import * as gmail from './utils/gmail';
 
 /**
  * Initlize the app
- *
- * @return  {Promise<void>}
  */
 (async () => {
   await database.open();
