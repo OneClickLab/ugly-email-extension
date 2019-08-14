@@ -1,0 +1,47 @@
+{
+  "name": "ugly-email-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx webpack --config webpack.config.js --progress --watch",
+    "build": "npm run test && npx webpack --config webpack.config.js --mode=production",
+    "package": "npm run build:production && ./scripts/package",
+    "test": "npm run lint && npm run test:unit",
+    "test:unit": "jest",
+    "lint": "eslint . --ext .ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OneClickLab/ugly-email-extension.git"
+  },
+  "author": "Sonny T.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OneClickLab/ugly-email-extension/issues"
+  },
+  "homepage": "https://uglyemail.com",
+  "dependencies": {
+    "gmail-js": "^0.9.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/node": "^11.9.4",
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
+    "babel-loader": "^8.0.5",
+    "copy-webpack-plugin": "^4.6.0",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-loader": "^2.2.1",
+    "eslint-plugin-import": "^2.18.2",
+    "jest": "^24.8.0",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.3.3",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.3"
+  }
+}
