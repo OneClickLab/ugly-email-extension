@@ -12,11 +12,6 @@ export class DataBase {
 
   /**
    * Find record by key
-   *
-   * @param   {string}        table
-   * @param   {string}        key
-   *
-   * @return  {Promise<any>}
    */
   findByKey(table: string, key: string): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -29,12 +24,6 @@ export class DataBase {
 
   /**
    * Find using a query
-   *
-   * @param   {string}        table
-   * @param   {string}        index
-   * @param   {any}           query
-   *
-   * @return  {Promise<any>}
    */
   find(table: string, query: any): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -47,11 +36,6 @@ export class DataBase {
 
   /**
    * Create record
-   *
-   * @param   {string}  table
-   * @param   {any}     data
-   *
-   * @return  {Promise<any>}
    */
   create(table: string, data: any = {}): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -64,12 +48,6 @@ export class DataBase {
 
   /**
    * Update record by key
-   *
-   * @param   {string}  table
-   * @param   {string}  key
-   * @param   {any}     data
-   *
-   * @return  {Promise<any>}
    */
   async updateByKey(table: string, key: string, data: any = {}): Promise<any> {
     const record = await this.findByKey(table, key);
@@ -83,11 +61,6 @@ export class DataBase {
 
   /**
    * Remove record by key
-   *
-   * @param   {string}        table
-   * @param   {string}        key
-   *
-   * @return  {Promise<any>}
    */
   removeByKey(table: string, key: string): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -100,8 +73,6 @@ export class DataBase {
 
   /**
    * Open connection
-   *
-   * @return  {Promise<any>}
    */
   open(): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -124,8 +95,6 @@ export class DataBase {
 
   /**
    * Upgrade Database
-   *
-   * @return  {Promise<any>}
    */
   upgrade(): Promise<any> {
     const createEmails = () => new Promise((resolve) => {
@@ -146,11 +115,6 @@ export class DataBase {
 
   /**
    * Instnace of table strore
-   *
-   * @param   {string}              table
-   * @param   {IDBTransactionMode}  role
-   *
-   * @return  {IDBObjectStore}
    */
   store(table: string, role: IDBTransactionMode = 'readwrite'): IDBObjectStore {
     return this.db.transaction([table], role).objectStore(table);

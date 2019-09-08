@@ -11,8 +11,6 @@ interface Response {
 
 /**
  * Get the pixel version
- *
- * @return  {string}
  */
 export function getVersion(): string {
   return VERSION;
@@ -30,10 +28,6 @@ export async function fetchPixels(): Promise<Response> {
 
 /**
  * Check if string contains a pixel
- *
- * @param   {string}  text
- *
- * @return  {string}
  */
 export function checkForPixel(text: string): string {
   const pixel = PIXELS.find((p) => new RegExp(p, 'g').test(text));
@@ -42,8 +36,6 @@ export function checkForPixel(text: string): string {
 
 /**
  * Initilize
- *
- * @return  {Promise<void>}
  */
 export async function init(): Promise<void> {
   const { version, pixels } = await fetchPixels();

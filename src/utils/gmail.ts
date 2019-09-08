@@ -5,10 +5,6 @@ import { checkForPixel } from './pixel';
 /**
  * Fetch email thread by id
  * it will try 8 times before giving up.
- *
- * @param   {string}        id
- *
- * @return  {Promise<any>}
  */
 export function fetchById(id: string): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -42,8 +38,6 @@ export function fetchById(id: string): Promise<any> {
 
 /**
  * Get all the `span` elements from the list
- *
- * @return  {HTMLSpanElement[]}
  */
 function getListOfEmails(): HTMLSpanElement[] {
   const elements: NodeListOf<HTMLSpanElement> = document.querySelectorAll('.bog span:not([data-ugly-checked="yes"]');
@@ -52,8 +46,6 @@ function getListOfEmails(): HTMLSpanElement[] {
 
 /**
  * Get the current thread ID
- *
- * @return  {string}
  */
 function getThreadId(): string {
   const element: HTMLHeadingElement = document.querySelector('h2.hP');
@@ -63,11 +55,6 @@ function getThreadId(): string {
 /**
  * First checks if the `element` contains the ugly icon,
  * if not, it creates one and prepend it.
- *
- * @param   {Element}  element
- * @param   {string}   tracker
- *
- * @return  {void}
  */
 function markElementUgly(element: Element, tracker: string): void {
   const icon: HTMLImageElement = element.querySelector('img.ugly-email-track-icon');
@@ -89,11 +76,6 @@ function markElementUgly(element: Element, tracker: string): void {
 
 /**
  * Mark the list item ugly
- *
- * @param   {HTMLSpanElement}  element
- * @param   {string}           tracker
- *
- * @return  {void}
  */
 function markListItemUgly(element: HTMLSpanElement, tracker: string): void {
   const parent: Element = element.closest('.xT');
@@ -102,10 +84,6 @@ function markListItemUgly(element: HTMLSpanElement, tracker: string): void {
 
 /**
  * Mark the thread ugly
- *
- * @param   {string}  tracker
- *
- * @return  {void}
  */
 function markThreadUgly(tracker: string): void {
   const parent: HTMLDivElement = document.querySelector('.ade');
@@ -114,10 +92,6 @@ function markThreadUgly(tracker: string): void {
 
 /**
  * Checks for email in the Database before fetching it.
- *
- * @param   {string}        id
- *
- * @return  {Promise<null|string>}
  */
 async function getTracker(id: string): Promise<null|string> {
   let tracker = null;
@@ -141,8 +115,6 @@ async function getTracker(id: string): Promise<null|string> {
 
 /**
  * Check thread page
- *
- * @return  {Promise<void>}
  */
 export async function checkThread(): Promise<void> {
   const id: string = getThreadId();
@@ -155,8 +127,6 @@ export async function checkThread(): Promise<void> {
 
 /**
  * Check the list page
- *
- * @return  {Promise<void>}
  */
 export async function checkList(): Promise<void> {
   const emails = getListOfEmails();

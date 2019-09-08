@@ -22,8 +22,6 @@ import * as gmail from './utils/gmail';
 
   /**
    * Runs every 2500 milliseconds and triggers a check.
-   *
-   * @return  {Promise<void>}
    */
   async function observe(): Promise<void> {
     if (Gmailjs.check.is_inside_email()) {

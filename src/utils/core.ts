@@ -2,8 +2,6 @@ import database from './db';
 
 /**
  * Store the version and updated-on date.
- *
- * @return  {Promise<void>}
  */
 export async function setup(version: string): Promise<void> {
   await database.create('meta', { key: 'version', value: version });
@@ -13,8 +11,6 @@ export async function setup(version: string): Promise<void> {
 /**
  * Updates the `version` and `updated-on` records.
  * Removes all untracked email records.
- *
- * @return  {Promise<void>}
  */
 export async function upgrade(version: string): Promise<void> {
   await database.updateByKey('meta', 'version', { value: version });
