@@ -16,7 +16,7 @@ Gmail.helper.get.email_data_post = (data: any) => {
 
   try {
     result = SuperEmailDataPost(data);
-  } catch (e) {
+  } catch {
     // SHHHHH!
   }
 
