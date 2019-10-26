@@ -28,3 +28,4 @@ node_modules
 # Third Party
 .DS_Store
 .sass-cache
+.vscode
