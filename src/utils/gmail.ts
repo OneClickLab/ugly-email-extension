@@ -36,9 +36,6 @@ export function fetchEmailById(id: string): Promise<any> {
   });
 }
 
-/**
- * Checks for email in the Database before fetching it.
- */
 export async function findTracker(id: string): Promise<string> {
   const record = await findEmailById(id);
 
