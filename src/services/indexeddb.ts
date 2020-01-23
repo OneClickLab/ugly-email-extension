@@ -1,4 +1,4 @@
-export class DataBase {
+export class IndexedDB {
   name: string;
 
   version: number;
@@ -10,9 +10,6 @@ export class DataBase {
     this.version = 1;
   }
 
-  /**
-   * Find record by key
-   */
   findByKey(table: string, key: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const request = this.store(table).get(key);
@@ -22,9 +19,6 @@ export class DataBase {
     });
   }
 
-  /**
-   * Find using a query
-   */
   find(table: string, query: any): Promise<any> {
     return new Promise((resolve, reject) => {
       const request = this.store(table).getAll(query);
@@ -34,9 +28,6 @@ export class DataBase {
     });
   }
 
-  /**
-   * Create record
-   */
   create(table: string, data: any = {}): Promise<any> {
     return new Promise((resolve, reject) => {
       const request = this.store(table).add(data);
@@ -46,9 +37,6 @@ export class DataBase {
     });
   }
 
-  /**
-   * Update record by key
-   */
   async updateByKey(table: string, key: string, data: any = {}): Promise<any> {
     const record = await this.findByKey(table, key);
 
@@ -59,9 +47,6 @@ export class DataBase {
     });
   }
 
-  /**
-   * Remove record by key
-   */
   removeByKey(table: string, key: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const request = this.store(table).delete(key);
@@ -71,10 +56,7 @@ export class DataBase {
     });
   }
 
-  /**
-   * Open connection
-   */
-  open(): Promise<any> {
+  init(): Promise<any> {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open(this.name, this.version);
 
@@ -93,9 +75,6 @@ export class DataBase {
     });
   }
 
-  /**
-   * Upgrade Database
-   */
   upgrade(): Promise<any> {
     const createEmails = () => new Promise((resolve) => {
       const store = this.db.createObjectStore('emails', { keyPath: 'id' });
@@ -113,12 +92,9 @@ export class DataBase {
     return Promise.all([createEmails(), createMeta()]);
   }
 
-  /**
-   * Instnace of table strore
-   */
   store(table: string, role: IDBTransactionMode = 'readwrite'): IDBObjectStore {
     return this.db.transaction([table], role).objectStore(table);
   }
 }
 
-export default new DataBase();
+export default new IndexedDB();

@@ -1,32 +1,33 @@
-import database from './db';
+import indexedDB from '../services/indexeddb';
+import trackers from '../services/trackers';
+import { flushUntracked } from './database';
 
-/**
- * Store the version and updated-on date.
- */
-export async function setup(version: string): Promise<void> {
-  await database.create('meta', { key: 'version', value: version });
-  await database.create('meta', { key: 'updated-on', value: new Date().toString() });
+export async function setup(version: number):Promise<void> {
+  await indexedDB.create('meta', { key: 'version', value: version });
+  await indexedDB.create('meta', { key: 'updated-on', value: new Date().toString() });
 }
 
-/**
- * Updates the `version` and `updated-on` records.
- * Removes all untracked email records.
- */
-export async function upgrade(version: string): Promise<void> {
-  await database.updateByKey('meta', 'version', { value: version });
-  await database.updateByKey('meta', 'updated-on', { value: new Date().toString() });
+export async function upgrade(version: number):Promise<void> {
+  await indexedDB.updateByKey('meta', 'version', { value: version });
+  await indexedDB.updateByKey('meta', 'updated-on', { value: new Date().toString() });
+  await flushUntracked();
+}
 
-  // get untracked emails
-  const emails = await database.find('emails', null);
+export async function getCurrentVersion():Promise<number> {
+  const record = await indexedDB.findByKey('meta', 'version');
+  return record ? record.value : null;
+}
 
-  // loop through each email in the db and remove the ones that are not tracked.
-  const removedEmails = emails.reduce((arr: Array<Promise<any>>, email: any) => {
-    if (email.value) {
-      arr.push(database.removeByKey('emails', email.id));
-    }
+export async function init():Promise<void> {
+  await indexedDB.init();
+  await trackers.init();
 
-    return arr;
-  }, []);
+  const currentVersion = await getCurrentVersion();
 
-  await Promise.all(removedEmails);
+  // first time setup
+  if (!currentVersion) {
+    await setup(trackers.verision);
+  } else if (currentVersion !== trackers.verision) {
+    await upgrade(trackers.verision);
+  }
 }
