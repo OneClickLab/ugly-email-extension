@@ -1,27 +1,12 @@
 import Gmailjs from '../vendor/gmail-js';
-import database from './utils/db';
-import { setup, upgrade } from './utils/core';
-import * as pixel from './utils/pixel';
-import * as gmail from './utils/gmail';
+import * as gmail from './utils/dom';
+import { init } from './utils/core';
 
-/**
- * Initlize the app
- */
 (async () => {
-  await database.open();
-  await pixel.init();
-
-  const record = await database.findByKey('meta', 'version');
-  const version = pixel.getVersion();
-
-  if (!record) {
-    await setup(version);
-  } else if (record.value !== version) {
-    await upgrade(version);
-  }
+  await init();
 
   /**
-   * Runs every 2500 milliseconds and triggers a check.
+   * Runs every 2500ms
    */
   async function observe(): Promise<void> {
     if (Gmailjs.check.is_inside_email()) {
@@ -30,7 +15,6 @@ import * as gmail from './utils/gmail';
       await gmail.checkList();
     }
 
-    // run again 2500 milliseconds
     setTimeout(observe, 2500);
   }
 
