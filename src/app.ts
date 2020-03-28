@@ -1,9 +1,26 @@
 import Gmailjs from '../vendor/gmail-js';
 import * as gmail from './utils/dom';
-import { init } from './utils/core';
+import * as database from './utils/database';
+import indexedDB from './services/indexeddb';
+import trackers from './services/trackers';
 
 (async () => {
-  await init();
+  await Promise.all([
+    indexedDB.init(),
+    trackers.init(),
+  ]);
+
+  const currentVersion = await database.getCurrentVersion();
+
+  // first time setup
+  if (!currentVersion) {
+    await database.setup(trackers.verision);
+  } else if (currentVersion !== trackers.verision) {
+    await Promise.all([
+      database.upgrade(trackers.verision),
+      database.upgrade(trackers.verision),
+    ]);
+  }
 
   /**
    * Runs every 2500ms

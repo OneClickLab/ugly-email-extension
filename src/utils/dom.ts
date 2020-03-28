@@ -5,9 +5,8 @@ function getListOfEmails(): HTMLSpanElement[] {
   return Array.from(elements);
 }
 
-function getThreadId(): string {
-  const element: HTMLHeadingElement = document.querySelector('h2.hP');
-  return element.dataset.legacyThreadId;
+function getThread(): HTMLHeadElement {
+  return document.querySelector('h2.hP');
 }
 
 function markElementUgly(element: Element, tracker: string): void {
@@ -33,37 +32,35 @@ function markListItemUgly(element: HTMLSpanElement, tracker: string): void {
   markElementUgly(parent, tracker);
 }
 
-function markThreadUgly(tracker: string): void {
-  const parent: HTMLDivElement = document.querySelector('.ade');
+function markThreadUgly(element: HTMLHeadElement, tracker: string): void {
+  const parent: HTMLDivElement = element.closest('.nH.V8djrc.byY').querySelector('.ade');
   markElementUgly(parent, tracker);
 }
 
 export async function checkThread(): Promise<void> {
-  const id: string = getThreadId();
+  const email = getThread();
+  const id = email.dataset.legacyThreadId;
   const tracker = await findTracker(id);
 
   if (tracker) {
-    markThreadUgly(tracker);
+    markThreadUgly(email, tracker);
   }
 }
 
 export async function checkList(): Promise<void> {
   const emails = getListOfEmails();
 
-  const checkEmail = (email: any) => new Promise((resolve) => {
+  const checkedEmails = emails.map(async (email) => {
     const id = email.dataset.legacyThreadId;
+    const tracker = await findTracker(id);
 
-    findTracker(id).then((tracker) => {
-      if (tracker) {
-        markListItemUgly(email, tracker);
-      }
+    if (tracker) {
+      markListItemUgly(email, tracker);
+    }
 
-      // mark checked
-      email.dataset.uglyChecked = 'yes'; // eslint-disable-line no-param-reassign
-      resolve();
-    });
+    // mark checked
+    email.dataset.uglyChecked = 'yes'; // eslint-disable-line no-param-reassign
   });
 
-  const checkedEmails = emails.map(checkEmail);
   await Promise.all(checkedEmails);
 }

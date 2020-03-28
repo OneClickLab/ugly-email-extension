@@ -4,7 +4,7 @@ import { findEmailById, createEmail } from './database';
 
 /**
  * Fetch email thread by id
- * it will try 8 times before giving up.
+ * it will try 3 times before giving up.
  */
 export function fetchEmailById(id: string): Promise<any> {
   return new Promise((resolve, reject) => {
