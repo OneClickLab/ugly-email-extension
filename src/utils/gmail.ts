@@ -9,12 +9,15 @@ import { findEmailById, createEmail } from './database';
 export function fetchEmailById(id: string): Promise<any> {
   return new Promise((resolve, reject) => {
     let count = 0;
+    let timer: NodeJS.Timeout;
 
     // fetch data
     const fetchData = () => {
       count += 1;
 
       Gmail.get.email_data_async(id, (email: any) => {
+        clearTimeout(timer);
+
         if (email.thread_id) {
           const last = email.last_email;
           const thread = email.threads[last];
@@ -23,8 +26,9 @@ export function fetchEmailById(id: string): Promise<any> {
         }
 
         // if thread is not there, try again.
-        if (count < 8) {
-          return setTimeout(fetchData, 1000);
+        if (count < 3) {
+          timer = setTimeout(fetchData, 1000);
+          return;
         }
 
         return reject();
