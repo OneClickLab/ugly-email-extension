@@ -1,10 +1,9 @@
 language: node_js
-sudo: required
 before_install:
   - npm install -g node-gyp
 addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-5
+ apt:
+  sources:
+   - ubuntu-toolchain-r-test
+  packages:
+   - g++-4.8
