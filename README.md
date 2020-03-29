@@ -1,4 +1,4 @@
-# Ugly Email Extension [![Build Status](https://travis-ci.com/OneClickLab/ugly-email-extension.svg?branch=master)](https://travis-ci.com/OneClickLab/ugly-email-extension)
+# Ugly Email Extension [![Build Status](https://travis-ci.com/OneClickLab/ugly-email-extension.svg?branch=master)](https://travis-ci.com/OneClickLab/ugly-email-extension) ![GitHub tag (latest SemVer pre-release)](https://img.shields.io/github/v/tag/OneClickLab/ugly-email-extension?include_prereleases)
 Gmail extension for blocking read receipts and other email tracking pixels.
 
 ## Contributing
