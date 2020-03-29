@@ -14,11 +14,11 @@ import trackers from './services/trackers';
 
   // first time setup
   if (!currentVersion) {
-    await database.setup(trackers.verision);
-  } else if (currentVersion !== trackers.verision) {
+    await database.setup(trackers.version);
+  } else if (currentVersion !== trackers.version) {
     await Promise.all([
-      database.upgrade(trackers.verision),
-      database.upgrade(trackers.verision),
+      database.upgrade(trackers.version),
+      database.upgrade(trackers.version),
     ]);
   }
 

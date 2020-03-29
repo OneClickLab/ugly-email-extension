@@ -39,7 +39,7 @@ export async function flushUntracked() {
 
   // loop through each email in the db and remove the ones that are not tracked.
   const removedEmails = emails.reduce((arr: Array<Promise<any>>, email: any) => {
-    if (email.value) {
+    if (!email.value) {
       arr.push(indexedDB.removeByKey('emails', email.id));
     }
 

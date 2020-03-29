@@ -6,7 +6,7 @@ type ServerResponse = {
 }
 
 export class Trackers {
-  verision: number = null
+  version: number = null
 
   identifiers: string[] = []
 
@@ -15,7 +15,7 @@ export class Trackers {
   async init() {
     const trackers = await Trackers.fetchTrackers();
 
-    this.verision = trackers.version;
+    this.version = trackers.version;
     this.identifiers = Object.values(trackers.pixels);
 
     const pixels = Object.entries(trackers.pixels).map(([key, val]) => [val, key]);
