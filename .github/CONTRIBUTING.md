@@ -61,5 +61,6 @@ The default test script will do the following: lint with ESLint -> unit tests wi
 - **`scripts`** - contains build/package related scripts.
 - **`src`** - contains the source code.
   - **`utils`** - contains utilities shared across the entire codebase.
+  - **`services`** - contains services shared across the entire codebase.
 - **`vendor`** - contains the 3rd party vendor related code.
-  - `vendor/gmail-js.ts` - extending the gmail.js NPM package to handle the errors.
+  - `vendor/gmail-js.ts` - extending the gmail.js NPM package.
