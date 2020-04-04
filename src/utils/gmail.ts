@@ -28,7 +28,7 @@ export function fetchEmailById(id: string): Promise<any> {
         // if thread is not there, try again.
         if (count < 3) {
           timer = setTimeout(fetchData, 1000);
-          return;
+          return null;
         }
 
         return reject();

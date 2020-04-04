@@ -17,7 +17,7 @@ describe('IndexedDB service', () => {
   it('creates record', async () => {
     const record = await instance.create('emails', {
       id: '12345',
-      value: 'testing'
+      value: 'testing',
     });
 
     expect(record).toEqual('12345');

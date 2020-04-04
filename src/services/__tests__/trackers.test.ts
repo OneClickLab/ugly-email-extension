@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import instance, { Trackers } from '../trackers';
 
 describe('Trackers service', () => {
@@ -10,9 +11,9 @@ describe('Trackers service', () => {
       json: () => Promise.resolve({
         version: 5,
         pixels: {
-          'SendGrid': "\/wf\/open\\?upn="
-        }
-      })
+          SendGrid: '\/wf\/open\\?upn=',
+        },
+      }),
     }));
 
     expect(instance.version).toBeNull();
@@ -29,7 +30,7 @@ describe('Trackers service', () => {
   it('matches for pixel', async () => {
     [
       { test: 'testing body copy', res: null },
-      { test: 'testing body <img src="http://test.com/wf/open?upn=a"> copy', res: 'SendGrid' }
+      { test: 'testing body <img src="http://test.com/wf/open?upn=a"> copy', res: 'SendGrid' },
     ].forEach(({ test, res }) => expect(instance.match(test)).toEqual(res));
   });
 });
