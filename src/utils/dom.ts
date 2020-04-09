@@ -6,7 +6,7 @@ function getListOfEmails(): HTMLSpanElement[] {
 }
 
 function getThread(): HTMLHeadElement {
-  return document.querySelector('h2.hP');
+  return document.querySelector('h2.hP:not([data-ugly-checked="yes"]');
 }
 
 function markElementUgly(element: Element, tracker: string): void {
@@ -39,11 +39,17 @@ function markThreadUgly(element: HTMLHeadElement, tracker: string): void {
 
 export async function checkThread(): Promise<void> {
   const email = getThread();
-  const id = email.dataset.legacyThreadId;
-  const tracker = await findTracker(id);
 
-  if (tracker) {
-    markThreadUgly(email, tracker);
+  if (email) {
+    const id = email.dataset.legacyThreadId;
+    const tracker = await findTracker(id);
+
+    if (tracker) {
+      markThreadUgly(email, tracker);
+    }
+
+    // mark checked
+    email.dataset.uglyChecked = 'yes'; // eslint-disable-line no-param-reassign
   }
 }
 
