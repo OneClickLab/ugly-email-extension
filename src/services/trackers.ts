@@ -6,7 +6,7 @@ type ServerResponse = {
 }
 
 export class Trackers {
-  version: number = null
+  version: number
 
   identifiers: string[] = []
 

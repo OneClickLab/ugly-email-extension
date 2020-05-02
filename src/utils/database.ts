@@ -2,7 +2,7 @@ import indexedDB from '../services/indexeddb';
 
 type Email = {
   id: string
-  value?: string
+  value: string | null
 };
 
 export async function setup(version: number):Promise<void> {

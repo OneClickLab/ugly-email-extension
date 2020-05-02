@@ -40,7 +40,7 @@ export function fetchEmailById(id: string): Promise<any> {
   });
 }
 
-export async function findTracker(id: string): Promise<string> {
+export async function findTracker(id: string): Promise<string|null> {
   const record = await findEmailById(id);
 
   if (record) {
