@@ -27,13 +27,13 @@ import trackers from './services/trackers';
    */
   let timer: NodeJS.Timeout;
 
-  async function observe(): Promise<void> {
+  function observe() {
     clearTimeout(timer);
 
     if (Gmailjs.check.is_inside_email()) {
-      await gmail.checkThread();
+      gmail.checkThread();
     } else {
-      await gmail.checkList();
+      gmail.checkList();
     }
 
     timer = setTimeout(observe, 2500);

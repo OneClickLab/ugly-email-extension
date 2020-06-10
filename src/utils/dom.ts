@@ -62,10 +62,10 @@ export async function checkThread(): Promise<void> {
   }
 }
 
-export async function checkList(): Promise<void> {
+export function checkList(): void {
   const emails = getListOfEmails();
 
-  const checkedEmails = emails.map(async (email) => {
+  emails.forEach(async (email) => {
     const id = email.dataset.legacyThreadId;
 
     if (id) {
@@ -76,9 +76,6 @@ export async function checkList(): Promise<void> {
       }
     }
 
-    // mark checked
     email.dataset.uglyChecked = 'yes'; // eslint-disable-line no-param-reassign
   });
-
-  await Promise.all(checkedEmails);
 }

@@ -34,10 +34,12 @@ describe('dom util', () => {
 
     await dom.checkList();
 
-    const icon: HTMLImageElement = document.body.querySelector('.ugly-email-track-icon');
+    const icon = document.body.querySelector<HTMLImageElement>('.ugly-email-track-icon');
 
-    expect(icon).toBeDefined();
-    expect(icon.dataset.tooltip).toEqual('SendGrid');
+    if (icon) {
+      expect(icon).toBeDefined();
+      expect(icon.dataset.tooltip).toEqual('SendGrid');
+    }
   });
 
   it('marks thread ugly', async () => {
@@ -54,9 +56,11 @@ describe('dom util', () => {
 
     await dom.checkThread();
 
-    const icon: HTMLImageElement = document.body.querySelector('.ugly-email-track-icon');
+    const icon = document.body.querySelector<HTMLImageElement>('.ugly-email-track-icon');
 
-    expect(icon).toBeDefined();
-    expect(icon.dataset.tooltip).toEqual('MailChimp');
+    if (icon) {
+      expect(icon).toBeDefined();
+      expect(icon.dataset.tooltip).toEqual('MailChimp');
+    }
   });
 });
