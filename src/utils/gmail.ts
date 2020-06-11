@@ -47,14 +47,18 @@ export async function findTracker(id: string): Promise<string|null> {
     return record.value;
   }
 
-  // fetch email
-  const email = await fetchEmailById(id);
+  try {
+    // fetch email
+    const email = await fetchEmailById(id);
 
-  // check if email is tracked
-  const tracker = trackers.match(email.content_html);
+    // check if email is tracked
+    const tracker = await trackers.matchAsync(id, email.content_html);
 
-  // create a new record
-  await createEmail(id, tracker);
+    // create a new record
+    await createEmail(id, tracker);
 
-  return tracker;
+    return tracker;
+  } catch {
+    return null;
+  }
 }

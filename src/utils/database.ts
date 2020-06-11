@@ -20,7 +20,7 @@ export async function getCurrentVersion():Promise<number> {
   return record ? record.value : null;
 }
 
-export function createEmail(id: string, tracker?: string): Promise<Email> {
+export function createEmail(id: string, tracker?: string | null): Promise<Email> {
   return indexedDB.create('emails', { id, value: tracker });
 }
 
