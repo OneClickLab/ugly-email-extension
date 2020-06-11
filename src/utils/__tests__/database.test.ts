@@ -29,7 +29,7 @@ describe('database util', () => {
     await Promise.all([
       database.createEmail('54321', 'MailChimp'),
       database.createEmail('12345', 'SendGrid'),
-      database.createEmail('33333', null),
+      database.createEmail('33333'),
     ]);
 
     expect(true).toBeTruthy();
@@ -45,7 +45,7 @@ describe('database util', () => {
     expect(emails.length).toEqual(3);
     expect(emails).toEqual([
       { id: '12345', value: 'SendGrid' },
-      { id: '33333', value: null },
+      { id: '33333' },
       { id: '54321', value: 'MailChimp' },
     ]);
   });

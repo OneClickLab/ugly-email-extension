@@ -3,11 +3,13 @@ import * as gmail from './utils/dom';
 import * as database from './utils/database';
 import indexedDB from './services/indexeddb';
 import trackers from './services/trackers';
+import worker from './services/worker';
 
 (async () => {
   await Promise.all([
     indexedDB.init(),
     trackers.init(),
+    worker.init(),
   ]);
 
   const currentVersion = await database.getCurrentVersion();
@@ -27,7 +29,7 @@ import trackers from './services/trackers';
    */
   let timer: NodeJS.Timeout;
 
-  async function observe(): Promise<void> {
+  async function observe() {
     clearTimeout(timer);
 
     if (Gmailjs.check.is_inside_email()) {

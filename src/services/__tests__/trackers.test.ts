@@ -16,7 +16,7 @@ describe('Trackers service', () => {
       }),
     }));
 
-    expect(instance.version).toBeNull();
+    expect(instance.version).toBeUndefined();
     expect(instance.identifiers).toEqual([]);
 
     await instance.init();

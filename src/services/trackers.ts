@@ -1,3 +1,5 @@
+import worker from './worker';
+
 type ServerResponse = {
   version: number,
   pixels: {
@@ -6,7 +8,7 @@ type ServerResponse = {
 }
 
 export class Trackers {
-  version: number = null
+  version: number
 
   identifiers: string[] = []
 
@@ -28,8 +30,13 @@ export class Trackers {
     return response.json();
   }
 
-  match(body: string): string {
+  match(body: string): string | null {
     const pixel = this.identifiers.find((p) => new RegExp(p, 'g').test(body));
+    return pixel ? this.pixels.get(pixel) : null;
+  }
+
+  async matchAsync(id: string, body: string): Promise<string | null> {
+    const pixel = await worker.postMessage(id, body, this.identifiers);
     return pixel ? this.pixels.get(pixel) : null;
   }
 }
