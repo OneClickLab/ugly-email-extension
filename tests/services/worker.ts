@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 import workerInstance, { UglyWorker } from '../../src/services/worker';
 
 describe('Worker service', () => {
@@ -16,7 +17,7 @@ describe('Worker service', () => {
   it('sends a message', () => {
     const postMessage = jest.spyOn(workerInstance['instance'], 'postMessage');
 
-    expect(workerInstance['resolvers']).toMatchObject({})
+    expect(workerInstance['resolvers']).toMatchObject({});
 
     workerInstance.postMessage('12345', '<div></div>', ['sendgrid']);
 
@@ -25,7 +26,7 @@ describe('Worker service', () => {
     expect(postMessage).toBeCalledWith({
       id: '12345',
       body: '<div></div>',
-      identifiers: ['sendgrid']
+      identifiers: ['sendgrid'],
     });
   });
 });

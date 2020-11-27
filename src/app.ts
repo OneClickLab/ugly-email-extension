@@ -8,7 +8,7 @@ import './services/worker';
 (async () => {
   await Promise.all([
     indexedDB.init(),
-    trackers.init()
+    trackers.init(),
   ]);
 
   const currentVersion = await database.getCurrentVersion();
