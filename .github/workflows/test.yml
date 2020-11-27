@@ -1,4 +1,4 @@
-name: Lint & Test
+name: Lint & Tests
 
 on: push
 
@@ -17,7 +17,7 @@ jobs:
       - name: Install Packages
         run: npm ci
 
-      - name: Run Test & Linte
+      - name: Run Lint & Tests
         run: npm run test
 
       - name: Codecov
