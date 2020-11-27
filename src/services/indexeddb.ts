@@ -1,14 +1,9 @@
 export class IndexedDB {
-  name: string;
+  name = 'ugly-email';
 
-  version: number;
+  version = 1;
 
   db: IDBDatabase;
-
-  constructor() {
-    this.name = 'ugly-email';
-    this.version = 1;
-  }
 
   findByKey(table: string, key: string): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -56,7 +51,7 @@ export class IndexedDB {
     });
   }
 
-  init(): Promise<any> {
+  init(): Promise<void> {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open(this.name, this.version);
 

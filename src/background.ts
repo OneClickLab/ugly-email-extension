@@ -6,7 +6,7 @@ declare let browser: any;
   await trackers.init();
 
   const filters = {
-    urls: ['https://*.googleusercontent.com/proxy/*'],
+    urls: ['*://*.googleusercontent.com/proxy/*'],
     types: ['image'],
   };
 
@@ -16,6 +16,6 @@ declare let browser: any;
 
   (chrome || browser).webRequest.onBeforeRequest.addListener((details: RequestDetails) => {
     const pixel = trackers.match(details.url);
-    return { cancel: pixel };
+    return { cancel: !!pixel };
   }, filters, ['blocking']);
 })();

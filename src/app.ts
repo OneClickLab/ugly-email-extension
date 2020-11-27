@@ -3,13 +3,12 @@ import * as gmail from './utils/dom';
 import * as database from './utils/database';
 import indexedDB from './services/indexeddb';
 import trackers from './services/trackers';
-import worker from './services/worker';
+import './services/worker';
 
 (async () => {
   await Promise.all([
     indexedDB.init(),
-    trackers.init(),
-    worker.init(),
+    trackers.init()
   ]);
 
   const currentVersion = await database.getCurrentVersion();
@@ -18,10 +17,7 @@ import worker from './services/worker';
   if (!currentVersion) {
     await database.setup(trackers.version);
   } else if (currentVersion !== trackers.version) {
-    await Promise.all([
-      database.upgrade(trackers.version),
-      database.upgrade(trackers.version),
-    ]);
+    await database.upgrade(trackers.version);
   }
 
   /**

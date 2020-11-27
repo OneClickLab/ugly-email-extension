@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx webpack --config webpack.config.js --progress --watch",
-    "dev:test": "npx jest --watch",
+    "dev:test": "npx jest --watch --passWithNoTests --coverage=true",
     "build": "npm run test && npx webpack --config webpack.config.js --mode=production",
-    "package": "npm run build:production && ./scripts/package",
     "test": "npm run lint && npm run test:unit",
     "test:unit": "jest --passWithNoTests",
     "lint": "eslint . --ext .ts"
@@ -23,7 +22,7 @@
   },
   "homepage": "https://uglyemail.com",
   "dependencies": {
-    "gmail-js": "^0.9.1"
+    "gmail-js": "^1.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -31,7 +30,6 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-typescript": "^7.3.3",
     "@types/jest": "^24.0.17",
-    "@types/node": "^11.9.4",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
     "babel-loader": "^8.0.5",
@@ -41,11 +39,12 @@
     "eslint-loader": "^2.2.1",
     "eslint-plugin-import": "^2.18.2",
     "fake-indexeddb": "^3.0.0",
-    "jest": "^25.2.3",
+    "jest": "^25.5.4",
+    "jest-fetch-mock": "^3.0.3",
     "ts-jest": "^24.0.2",
     "ts-loader": "^5.3.3",
-    "typescript": "^3.3.3",
-    "webpack": "^4.29.0",
-    "webpack-cli": "^3.2.3"
+    "typescript": "^4.1.2",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
   }
 }

@@ -1,12 +1,5 @@
 import worker from './worker';
 
-type ServerResponse = {
-  version: number,
-  pixels: {
-    [key: string]: string
-  }
-}
-
 export class Trackers {
   version: number
 
@@ -17,17 +10,27 @@ export class Trackers {
   async init() {
     const trackers = await Trackers.fetchTrackers();
 
-    this.version = trackers.version;
-    this.identifiers = Object.values(trackers.pixels);
+    this.version = await Trackers.fetchVersion();
 
-    const pixels = Object.entries(trackers.pixels).map(([key, val]) => [val, key]);
-
-    this.pixels = new Map(pixels as [string, string][]);
+    trackers.forEach(({ name, pattern }) => {
+      this.identifiers.push(pattern);
+      this.pixels.set(pattern, name);
+    });
   }
 
-  static async fetchTrackers(): Promise<ServerResponse> {
-    const response = await fetch(`https://trackers.uglyemail.com/list.json?ts=${new Date().getTime()}`);
-    return response.json();
+  static async fetchTrackers(): Promise<{ name: string, pattern: string }[]> {
+    const response = await fetch(`https://trackers.uglyemail.com/list.txt?ts=${new Date().getTime()}`);
+    const text = await response.text();
+    return text.split('\n').map((row) => {
+      const [name, pattern] = row.split('@@=');
+      return { name, pattern };
+    });
+  }
+
+  static async fetchVersion(): Promise<number> {
+    const response = await fetch(`https://trackers.uglyemail.com/version.txt?ts=${new Date().getTime()}`);
+    const text = await response.text();
+    return parseInt(text, 10);
   }
 
   match(body: string): string | null {

@@ -6,26 +6,27 @@ function workerFunction() {
   });
 }
 
+type Resolver = {
+  [id: string]: (val: string | null) => void
+}
+
 export class UglyWorker {
-  instance: Worker
+  private instance: Worker;
 
-  resolvers: {
-    [id: string]: () => void
-  }
+  private resolvers: Resolver = {};
 
-  init() {
+  constructor() {
     const blob = new Blob([`(${workerFunction.toString()})()`], { type: 'text/javascript' });
     const url = URL.createObjectURL(blob);
 
     this.instance = new Worker(url);
-    this.resolvers = {};
 
     this.instance.onmessage = ({ data }) => {
       this.resolvers[data.id].call(this, data.pixel);
     };
   }
 
-  postMessage(id: string, body: string, identifiers: string[]) {
+  postMessage(id: string, body: string, identifiers: string[]): Promise<string|null> {
     this.instance.postMessage({ id, body, identifiers });
     return new Promise((resolve) => {
       this.resolvers[id] = resolve;

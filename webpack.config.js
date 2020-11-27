@@ -1,17 +1,15 @@
 const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
-const BROWSERS = ['firefox', 'chrome'];
-
 module.exports = {
   mode: 'development',
+  devtool: 'inline-source-map',
 
-  entry: BROWSERS.reduce((entries, browser) => {
-    entries[`${browser}/loader`] = './src/loader.ts';
-    entries[`${browser}/uglyemail`] = ['@babel/polyfill', './src/app.ts'];
-    entries[`${browser}/background`] = './src/background.ts';
-    return entries;
-  }, {}),
+  entry: {
+    loader: './src/loader.ts',
+    uglyemail: ['@babel/polyfill', './src/app.ts'],
+    background: './src/background.ts'
+  },
 
   module: {
     rules: [
@@ -39,18 +37,12 @@ module.exports = {
   },
 
   plugins: [
-    new CopyPlugin(BROWSERS.reduce((arr, browser) => [
-      ...arr,
+    new CopyPlugin([
       {
-        from: `./resources/manifests/${browser}.json`,
-        to: `${browser}/manifest.json`,
-        flatten: true
-      },
-      {
-        from: './resources/icons/**/*',
-        to: `${browser}/icons/`,
-        flatten: true
+        context: './assets/',
+        from: '**/*',
+        to: path.join(__dirname, 'dist')
       }
-    ], []))
+    ])
   ]
 };
