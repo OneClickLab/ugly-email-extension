@@ -55,12 +55,12 @@ There are some other scripts available in the `scripts` section of the `package.
 The default test script will do the following: lint with ESLint -> unit tests with coverage . **Please make sure to have this pass successfully before submitting a PR.** Although the same tests will be run against your PR on the CI server, it is better to have it working locally.
 
 ## Project Structure
-- **`resources`** - contains assets used for building the final extension packages.
-  - **`resources/icons`** - contains icons that used only for packaging.
-  - **`resources/manifests`** - browser specific manifest files.
+- **`assets`** - contains assets used for building the final extension packages.
+  - **`assets/icons`** - contains icons that used only for packaging.
 - **`scripts`** - contains build/package related scripts.
 - **`src`** - contains the source code.
   - **`utils`** - contains utilities shared across the entire codebase.
   - **`services`** - contains services shared across the entire codebase.
+- **`src`** - contains the test code.
 - **`vendor`** - contains the 3rd party vendor related code.
   - `vendor/gmail-js.ts` - extending the gmail.js NPM package.
