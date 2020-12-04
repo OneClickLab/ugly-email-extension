@@ -8,17 +8,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Use Node.js 10.x
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v1
         with:
           node-version: 10.x
-
-      - name: Install Packages
-        run: npm ci
-
-      - name: Run Lint & Tests
+      - run: npm ci
+      - name: Lint & Test
         run: npm run test
-
       - name: Codecov
         uses: codecov/codecov-action@v1.0.13
