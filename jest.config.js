@@ -3,9 +3,6 @@ module.exports = {
   collectCoverage: true,
   testMatch: ['<rootDir>/tests/**/*.ts'],
   roots: ['<rootDir>/src', '<rootDir>/tests'],
-  moduleNameMapper: {
-    '@app/(.*)$': '<rootDir>/src/$1'
-  },
   transform: {
     "^.+\\.ts?$": "ts-jest"
   },
