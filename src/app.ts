@@ -13,11 +13,11 @@ import './services/worker';
 
   const currentVersion = await database.getCurrentVersion();
 
-  // first time setup
-  if (!currentVersion) {
+  if (!currentVersion) { // first time setup
     await database.setup(trackers.version);
   } else if (currentVersion !== trackers.version) {
     await database.upgrade(trackers.version);
+    await database.flushUntracked();
   }
 
   /**
