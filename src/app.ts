@@ -3,7 +3,7 @@ import * as gmail from './utils/dom';
 import * as database from './utils/database';
 import indexedDB from './services/indexeddb';
 import trackers from './services/trackers';
-import './services/worker';
+import './services/messenger';
 
 (async () => {
   await Promise.all([

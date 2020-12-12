@@ -1,6 +1,6 @@
 import trackers from './services/trackers';
 
-declare let browser: any;
+declare let chrome: any;
 
 (async () => {
   await trackers.init();
@@ -14,8 +14,15 @@ declare let browser: any;
     url: string
   };
 
-  (chrome || browser).webRequest.onBeforeRequest.addListener((details: RequestDetails) => {
+  chrome.webRequest.onBeforeRequest.addListener((details: RequestDetails) => {
     const pixel = trackers.match(details.url);
     return { cancel: !!pixel };
   }, filters, ['blocking']);
+
+  chrome.runtime.onConnect.addListener((port: any) => {
+    port.onMessage.addListener((data: { id: string, body: string }) => {
+      const pixel = trackers.match(data.body);
+      port.postMessage({ pixel, id: data.id });
+    });
+  });
 })();

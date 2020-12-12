@@ -5,6 +5,18 @@ u.src = chrome.extension.getURL('uglyemail.js');
 
 (document.head || document.documentElement).appendChild(u);
 
+const connection = chrome.runtime.connect({ name: 'ugly-email' });
+
+connection.onMessage.addListener((message: { id: string, pixel: string }) => {
+  window.postMessage({ ...message, from: 'ugly-email-response' }, window.origin);
+});
+
+window.addEventListener('message', ({ data }) => {
+  if (data.from && data.from === 'ugly-email-check') {
+    connection.postMessage(data);
+  }
+});
+
 const s = document.createElement('style');
 s.appendChild(document.createTextNode(`
 .ade .ugly-email-track-icon {

@@ -1,9 +1,3 @@
-if (!window.URL.createObjectURL) {
-  window.URL.createObjectURL = () => jest.fn();
-}
-
-if (!window.Worker) {
-  window.Worker = class {
-    postMessage() { }
-  }
+if (!window.origin) {
+  window.origin = 'http://test.com'
 }
