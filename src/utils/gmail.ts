@@ -1,5 +1,5 @@
 import Gmail from '../../vendor/gmail-js';
-import trackers from '../services/trackers';
+import messenger from '../services/messenger';
 import { findEmailById, createEmail } from './database';
 
 /**
@@ -52,7 +52,7 @@ export async function findTracker(id: string): Promise<string|null> {
     const email = await fetchEmailById(id);
 
     // check if email is tracked
-    const tracker = await trackers.matchAsync(id, email.content_html);
+    const tracker = await messenger.postMessage(id, email.content_html);
 
     // create a new record
     await createEmail(id, tracker);

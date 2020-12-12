@@ -4,13 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx webpack --config webpack.config.js --progress --watch",
-    "dev:test": "npx jest --watch --passWithNoTests --coverage=true",
-    "build": "npm run test && npx webpack --config webpack.config.js --mode=production",
+    "clean": "rm -R dist",
+    "build": "parcel build src/uglyemail.ts src/background.ts src/loader.ts",
+    "dev": "parcel watch src/uglyemail.ts src/background.ts src/loader.ts",
+    "dev:test": "npx jest --watch --passWithNoTests",
     "test": "npm run lint && npm run test:unit",
     "test:unit": "jest --passWithNoTests",
     "lint": "eslint . --ext .ts"
   },
+  "staticFiles": {
+    "staticPath": "assets",
+    "watcherGlob": "**"
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OneClickLab/ugly-email-extension.git"
@@ -25,26 +34,17 @@
     "gmail-js": "^1.0.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.3.1",
-    "@babel/preset-typescript": "^7.3.3",
-    "@types/jest": "^24.0.17",
-    "@typescript-eslint/eslint-plugin": "^1.13.0",
-    "@typescript-eslint/parser": "^1.13.0",
-    "babel-loader": "^8.0.5",
-    "copy-webpack-plugin": "^5.1.1",
-    "eslint": "^6.1.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-loader": "^2.2.1",
-    "eslint-plugin-import": "^2.18.2",
-    "fake-indexeddb": "^3.0.0",
-    "jest": "^25.5.4",
+    "@types/jest": "^26.0.19",
+    "@typescript-eslint/eslint-plugin": "^4.9.1",
+    "eslint": "^7.15.0",
+    "eslint-config-airbnb-typescript": "^12.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "fake-indexeddb": "^3.1.2",
+    "jest": "^26.6.3",
     "jest-fetch-mock": "^3.0.3",
-    "ts-jest": "^24.0.2",
-    "ts-loader": "^5.3.3",
-    "typescript": "^4.1.2",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.5.0",
+    "ts-jest": "^26.4.4",
+    "typescript": "^4.1.3"
   }
 }

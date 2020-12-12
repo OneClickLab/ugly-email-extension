@@ -35,7 +35,7 @@ export async function findAllEmails(): Promise<Email[]> {
 }
 
 export async function flushUntracked() {
-  const emails = await this.findAllEmails();
+  const emails = await findAllEmails();
 
   // loop through each email in the db and remove the ones that are not tracked.
   const removedEmails = emails.reduce((arr: Array<Promise<any>>, email: any) => {

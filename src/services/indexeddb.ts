@@ -70,7 +70,7 @@ export class IndexedDB {
     });
   }
 
-  upgrade(): Promise<any> {
+  private upgrade(): Promise<any> {
     const createEmails = () => new Promise((resolve) => {
       const store = this.db.createObjectStore('emails', { keyPath: 'id' });
 
@@ -87,7 +87,7 @@ export class IndexedDB {
     return Promise.all([createEmails(), createMeta()]);
   }
 
-  store(table: string, role: IDBTransactionMode = 'readwrite'): IDBObjectStore {
+  private store(table: string, role: IDBTransactionMode = 'readwrite'): IDBObjectStore {
     return this.db.transaction([table], role).objectStore(table);
   }
 }

@@ -1,11 +1,9 @@
-import worker from './worker';
-
 export class Trackers {
-  version: number
+  version: number;
 
-  identifiers: string[] = []
+  identifiers: string[] = [];
 
-  pixels = new Map()
+  pixels = new Map();
 
   async init() {
     const trackers = await Trackers.fetchTrackers();
@@ -35,11 +33,6 @@ export class Trackers {
 
   match(body: string): string | null {
     const pixel = this.identifiers.find((p) => new RegExp(p, 'g').test(body));
-    return pixel ? this.pixels.get(pixel) : null;
-  }
-
-  async matchAsync(id: string, body: string): Promise<string | null> {
-    const pixel = await worker.postMessage(id, body, this.identifiers);
     return pixel ? this.pixels.get(pixel) : null;
   }
 }
