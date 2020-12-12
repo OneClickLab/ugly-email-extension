@@ -1,6 +1,6 @@
 type Resolver = {
   [id: string]: (val: string | null) => void
-}
+};
 
 export class UglyMessenger {
   private resolvers: Resolver = {};

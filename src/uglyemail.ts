@@ -23,7 +23,7 @@ import './services/messenger';
   /**
    * Runs every 2500ms
    */
-  let timer: NodeJS.Timeout;
+  let timer: any;
 
   async function observe() {
     clearTimeout(timer);

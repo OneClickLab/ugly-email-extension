@@ -1,4 +1,4 @@
-/* eslint-disable dot-notation */
+/* eslint-disable @typescript-eslint/dot-notation */
 import messengerInstance, { UglyMessenger } from '../../src/services/messenger';
 
 describe('Worker service', () => {
@@ -19,6 +19,6 @@ describe('Worker service', () => {
       id: '12345',
       body: '<div></div>',
       from: 'ugly-email-check',
-    }, 'http://test.com');
+    }, 'http://localhost');
   });
 });

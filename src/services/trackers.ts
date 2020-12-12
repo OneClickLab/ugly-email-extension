@@ -1,9 +1,9 @@
 export class Trackers {
-  version: number
+  version: number;
 
-  identifiers: string[] = []
+  identifiers: string[] = [];
 
-  pixels = new Map()
+  pixels = new Map();
 
   async init() {
     const trackers = await Trackers.fetchTrackers();
