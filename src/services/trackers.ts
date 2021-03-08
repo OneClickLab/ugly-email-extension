@@ -32,7 +32,7 @@ export class Trackers {
   }
 
   match(body: string): string | null {
-    const pixel = this.identifiers.find((p) => new RegExp(p, 'g').test(body));
+    const pixel = this.identifiers.find((p) => new RegExp(p, 'gi').test(body));
     return pixel ? this.pixels.get(pixel) : null;
   }
 }
