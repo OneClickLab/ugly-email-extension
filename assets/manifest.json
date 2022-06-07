@@ -18,7 +18,6 @@
     "uglyemail.js"
   ],
   "permissions": [
-    "storage",
     "webRequest",
     "webRequestBlocking",
     "https://mail.google.com/*",
