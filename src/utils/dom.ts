@@ -36,7 +36,7 @@ function markListItemUgly(element: HTMLSpanElement, tracker: string): void {
 }
 
 function markThreadUgly(element: HTMLHeadElement, tracker: string): void {
-  const parent = element.closest('.nH.V8djrc.byY')!.querySelector<HTMLDivElement>('.ade');
+  const parent = element.nextElementSibling;
 
   if (parent) {
     markElementUgly(parent, tracker);

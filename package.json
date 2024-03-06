@@ -31,10 +31,13 @@
   },
   "homepage": "https://uglyemail.com",
   "dependencies": {
-    "gmail-js": "^1.0.5"
+    "gmail-js": "^1.1.12",
+    "jquery": "^4.0.0-beta"
   },
   "devDependencies": {
+    "@types/chrome": "^0.0.262",
     "@types/jest": "^26.0.19",
+    "@types/jquery": "^3.5.29",
     "@typescript-eslint/eslint-plugin": "^4.9.1",
     "eslint": "^7.15.0",
     "eslint-config-airbnb-typescript": "^12.0.0",
@@ -46,5 +49,10 @@
     "parcel-plugin-static-files-copy": "^2.5.0",
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.3"
+  },
+  "overrides": {
+    "gmail-js": {
+      "jquery": "^4.0.0-beta"
+    }
   }
 }
