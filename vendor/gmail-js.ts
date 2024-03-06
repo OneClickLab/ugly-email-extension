@@ -21,6 +21,8 @@ if ((window as any).trustedTypes && (window as any).trustedTypes.createPolicy) {
 
 const Gmail = new service.Gmail(jQuery);
 
+Gmail.DISABLE_OLD_GMAIL_API_DEPRECATION_WARNINGS = true;
+
 /**
  * Override the email_data_post helper
  * catch the error and silence it
