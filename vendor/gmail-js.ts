@@ -1,9 +1,27 @@
 /**
  * gmail.js
  */
+import jQuery from 'jquery';
+
 const service = require('gmail-js');
 
-const Gmail = new service.Gmail();
+/**
+ * Override the jQuery object
+ */
+
+jQuery.isArray = Array.isArray;
+
+if ((window as any).trustedTypes && (window as any).trustedTypes.createPolicy) {
+  const htmlPrefilter = (window as any).trustedTypes.createPolicy('myEscapePolicy', {
+    createHTML: (string: string) => string.replace(/</g, '&lt;'),
+  });
+
+  jQuery.extend({ htmlPrefilter });
+}
+
+const Gmail = new service.Gmail(jQuery);
+
+Gmail.DISABLE_OLD_GMAIL_API_DEPRECATION_WARNINGS = true;
 
 /**
  * Override the email_data_post helper

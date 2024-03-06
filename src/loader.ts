@@ -1,5 +1,3 @@
-declare let chrome: any;
-
 const u = document.createElement('script');
 u.src = chrome.extension.getURL('uglyemail.js');
 
@@ -19,11 +17,11 @@ window.addEventListener('message', ({ data }) => {
 
 const s = document.createElement('style');
 s.appendChild(document.createTextNode(`
-.ade .ugly-email-track-icon {
-  margin-top: -6px;
-  height: 20px;
-  width: 20px;
-  opacity: .6;
+.J-J5-Ji .ugly-email-track-icon {
+  height: 18px;
+  width: 18px;
+  margin-top: 4px;
+  margin-right: 8px;
 }
 
 .ugly-email-track-icon {
@@ -37,7 +35,6 @@ s.appendChild(document.createTextNode(`
   float: left;
   margin-right: 5px;
   position: relative;
-  top: 3px;
 }
 `));
 
